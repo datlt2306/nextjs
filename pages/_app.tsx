@@ -4,7 +4,6 @@ import { EmptyLayout } from '@/layouts';
 
 function MyApp({ Component, pageProps }: AppPropsWithLayout) {
     const Layout = Component.Layout ?? EmptyLayout;
-
     return (
         <Layout>
             <Component {...pageProps} />
