@@ -1,22 +1,18 @@
-import Link from 'next/link'
-import style from './header.module.scss';
-
+import style from './Header.module.scss';
 type Props = {}
 
 const Header = (props: Props) => {
   return (
     <div>
-        <div className={style.demo}>
-            asdasda
-        </div>
-        <ul className='menu'>
-            <li><Link href="/"><a className='menu__item'>Home page</a></Link></li>
-            <li><Link href="/about"><a className='menu__item'>About</a></Link></li>
-            <li><Link href="/products"><a className='menu__item'>Product</a></Link></li>
-            <li><Link href="/contact"><a className='menu__item'>Contact</a></Link></li>
+        <ul className={style.menu}>
+            <li><a href="" className={style.menu__link}>menu 1</a></li>
+            <li><a href="" className={style.menu__link}>menu 2</a></li>
+            <li><a href="" className={style.menu__link}>menu 3</a></li>
+            <li><a href="" className={style.menu__link}>menu 4</a></li>
         </ul>
     </div>
   )
 }
 
 export default Header
+

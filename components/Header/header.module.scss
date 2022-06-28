@@ -1,6 +1,6 @@
-.demo{
-    @apply bg-black
-}
-.demo-gachcheo{
-    
+.menu{
+    @apply bg-orange-500 flex p-4 space-x-5;
+    &__link{
+        @apply block p-4 hover:bg-blue-500 hover:text-white;
+    }
 }

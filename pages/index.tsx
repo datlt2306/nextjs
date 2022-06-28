@@ -1,24 +1,19 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import Image from 'next/image'
-import Footer from '../components/Footer'
 import Header from '../components/Header'
-import styles from '../styles/Home.module.css'
 
 const Home: NextPage = () => {
   return (
-    <div className={styles.container}>
-      <Head>
-        <title>Website bán mỹ phẩm</title>
-        <meta name="description" content="Thông tin website bán mỹ phẩm" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+    <main>
+      <ul className='menu'>
+            <li><a href="" className='menu__link'>menu 1</a></li>
+            <li><a href="" className='menu__link'>menu 2</a></li>
+            <li><a href="" className='menu__link'>menu 3</a></li>
+            <li><a href="" className='menu__link'>menu 4</a></li>
+        </ul>
       <Header />
-      <main className={styles.main}>
-       Main
-      </main>
-      <Footer />
-    </div>
+    </main>
   )
 }
 
