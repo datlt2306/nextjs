@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import style from './Header.module.scss';
 type Props = {}
 
@@ -5,10 +6,9 @@ const Header = (props: Props) => {
   return (
     <div>
         <ul className={style.menu}>
-            <li><a href="" className={style.menu__link}>menu 1</a></li>
-            <li><a href="" className={style.menu__link}>menu 2</a></li>
-            <li><a href="" className={style.menu__link}>menu 3</a></li>
-            <li><a href="" className={style.menu__link}>menu 4</a></li>
+            <li><Link href="/" className={style.menu__link}>menu 1</Link></li>
+            <li><Link href="/products" className={style.menu__link}>menu 2</Link></li>
+            <li><Link href="/about" className={style.menu__link}>menu 3</Link></li>
         </ul>
     </div>
   )
