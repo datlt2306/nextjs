@@ -1,4 +1,4 @@
-import { GetStaticPaths, GetStaticProps, GetStaticPropsContext } from 'next'
+import { GetServerSideProps, GetServerSidePropsContext, GetStaticPaths, GetStaticProps, GetStaticPropsContext } from 'next'
 import { useRouter } from 'next/router'
 import React, { useEffect } from 'react'
 
@@ -15,26 +15,21 @@ const ProductDetail = ({product}: ProductProps) => {
 
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const data = await (await fetch(`http://localhost:3001/products`)).json();
+  const data = await (await fetch(`https://6110f09bc38a0900171f0ed0.mockapi.io/products`)).json();
+  console.log('data', data);
   const paths = data.map(item => {
     return { params: { id: item.id} }
   })
   return {
     paths,
-    fallback: false
+    fallback: 'blocking'
   }
 }
 
 export const getStaticProps: GetStaticProps<ProductProps> = async (
   context: GetStaticPropsContext
 ) => {
-
-  console.log('GET statics props');
-  console.log('context', context.params?.id);
-
-  // call api
-
-  const data = await ( await fetch(`http://localhost:3001/products/${context.params.id}`)).json()
+  const data = await ( await fetch(`https://6110f09bc38a0900171f0ed0.mockapi.io/products/${context.params.id}`)).json()
   if(!data){
     return {
       notFound: true
@@ -45,8 +40,29 @@ export const getStaticProps: GetStaticProps<ProductProps> = async (
       props: {
           product: data,
       },
+      revalidate: 10
   };
 };
 
+// export const getServerSideProps: GetServerSideProps = async ( context: GetServerSidePropsContext) => {
+//   context.res.setHeader(
+//     'Cache-Control',
+//     'public, s-maxage=10, stale-while-revalidate=59'
+//   )
+//   const data = await ( await fetch(`https://6110f09bc38a0900171f0ed0.mockapi.io/products/${context.params.id}`)).json()
+//   return {
+//     props: {
+//       product: data
+//     }
+//   }
+// }
 
 export default ProductDetail
+
+
+
+// Static Site Generation => Render ra cac file html co san
+// Server Side rendering => server trả về dữ liệu khi user truy cap
+// Client Side rendering => giống react
+// Icremental Static Generation => 
+// cache dữ liệu, khi truy cập vào 1 page không có thì sẽ chờ thời gian tạo page mới

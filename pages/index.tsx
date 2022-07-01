@@ -13,7 +13,6 @@ const Home: NextPage = () => {
         <meta name="description" content="Thông tin website bán mỹ phẩm" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Header />
       <main className={styles.main}>
        Main
       </main>
