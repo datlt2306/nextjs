@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import style from './Header.module.scss';
+import style from './header.module.scss';
 type Props = {}
 
 const Header = (props: Props) => {
