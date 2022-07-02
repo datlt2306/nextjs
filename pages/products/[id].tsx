@@ -1,4 +1,4 @@
-import { GetStaticPaths, GetStaticProps, GetStaticPropsContext } from 'next';
+import { GetServerSideProps, GetServerSidePropsContext, GetStaticPaths, GetStaticProps, GetStaticPropsContext } from 'next';
 import { useRouter } from 'next/router'
 import React, { useEffect } from 'react'
 
@@ -13,22 +13,31 @@ const ProductDetail = ({product}: ProductProps) => {
   )
 }
 
-export const getStaticPaths: GetStaticPaths = async () => {
-  const data = await (await fetch(`https://6110f09bc38a0900171f0ed0.mockapi.io/products`)).json();
-  const paths = data.map(product => (
-    { params: { id: product.id } }
-  ))
-  return {
-    paths,
-    fallback: false
-  }
-}
-// server
-export const getStaticProps: GetStaticProps<ProductProps> = async (context: GetStaticPropsContext) => {
+// export const getStaticPaths: GetStaticPaths = async () => {
+//   const data = await (await fetch(`https://6110f09bc38a0900171f0ed0.mockapi.io/products`)).json();
+//   const paths = data.map((product: any) => (
+//     { params: { id: product.id } }
+//   ))
+//   return {
+//     paths,
+//     fallback: false // blocking or true
+//   }
+// }
+// // server
+// export const getStaticProps: GetStaticProps<ProductProps> = async (context: GetStaticPropsContext) => {
+//   console.log('context', context);
+//   const product = await (await fetch(`https://6110f09bc38a0900171f0ed0.mockapi.io/products/${context.params?.id}`)).json();
+//   return {
+//     props: {product},
+//     revalidate: 60
+//   }
+// }
+
+export const getServerSideProps: GetServerSideProps = async (context: GetServerSidePropsContext) => {
+  console.log('context', context);
   const product = await (await fetch(`https://6110f09bc38a0900171f0ed0.mockapi.io/products/${context.params?.id}`)).json();
   return {
-    props: {product},
-    revalidate: 60
+    props: { product }
   }
 }
 
