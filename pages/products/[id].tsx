@@ -20,7 +20,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   ))
   return {
     paths,
-    fallback: false // blocking or true
+    fallback: true // blocking or true
   }
 }
 // server
@@ -29,7 +29,7 @@ export const getStaticProps: GetStaticProps<ProductProps> = async (context: GetS
   const product = await (await fetch(`https://6110f09bc38a0900171f0ed0.mockapi.io/products/${context.params?.id}`)).json();
   return {
     props: {product},
-    revalidate: 10
+    revalidate: 5
   }
 }
 
