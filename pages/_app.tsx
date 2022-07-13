@@ -1,13 +1,14 @@
 import "../styles/globals.scss";
 import type { AppProps } from "next/app";
 import { AppPropsWithLayout } from "../models/layout";
+import Layout from "../components/Layout";
 
 function MyApp({ Component, pageProps }: AppPropsWithLayout) {
-    const Layout = Component.Layout;
+    const LayoutWrapper = Component.Layout ?? Layout;
     return (
-        <Layout>
+        <LayoutWrapper>
             <Component {...pageProps} />
-        </Layout>
+        </LayoutWrapper>
     );
 }
 

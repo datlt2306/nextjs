@@ -21,7 +21,4 @@ const Home = () => {
     </div>
   )
 }
-
-Home.Layout = Layout
-
 export default Home
