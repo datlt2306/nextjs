@@ -1,9 +1,6 @@
 import React from 'react'
+import { LayoutProps } from '../../models/layout'
 import Header from '../Header'
-
-type LayoutProps = {
-    children: React.ReactNode
-}
 
 const Layout = ({children}: LayoutProps) => {
   return (

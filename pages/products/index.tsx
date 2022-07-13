@@ -1,13 +1,23 @@
 import { GetStaticProps, GetStaticPropsContext } from "next";
 import Link from "next/link";
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 type ProductsProps = {
     products: any[];
 };
 
 // client
-const ProductPage = ({ products }: ProductsProps) => {
+const ProductPage = () => {
+    const [products,setProducts] = useState([]);
+    
+    useEffect(() => {
+        // IFFE function
+        (async() => {
+            const data = await (await fetch(`https://6110f09bc38a0900171f0ed0.mockapi.io/products`)).json();
+            setProducts(data);
+        })()
+        // getProducts();
+    }, []);
     if (!products) return null;
     return (
         <div>
@@ -18,23 +28,23 @@ const ProductPage = ({ products }: ProductsProps) => {
     );
 };
 
-export const getServerSideProps = async ({req, res}) => {
-    res.setHeader(
-        'Cache-Control',
-        's-maxage=10'
-    )
-    const data = await (await fetch(`https://6110f09bc38a0900171f0ed0.mockapi.io/products`)).json();
-    if(!data){
-        return {
-        notFound: true
-        }
-    }
-    return {
-        props: {
-            products: data,
-        },
-    };
-}
+// export const getServerSideProps = async ({req, res}) => {
+//     res.setHeader(
+//         'Cache-Control',
+//         's-maxage=10, stale-while-revalidate=20'
+//     )
+//     const data = await (await fetch(`https://6110f09bc38a0900171f0ed0.mockapi.io/products`)).json();
+//     if(!data){
+//         return {
+//         notFound: true
+//         }
+//     }
+//     return {
+//         props: {
+//             products: data,
+//         },
+//     };
+// }
 // // Chạy ở server
 // export const getStaticProps: GetStaticProps<ProductsProps> = async (
 //     context: GetStaticPropsContext
@@ -50,6 +60,7 @@ export const getServerSideProps = async ({req, res}) => {
 //         props: {
 //             products: data,
 //         },
+//         revalidate: 60
 //     };
 // };
 
