@@ -21,7 +21,7 @@ const ProductPage = ({ products }: ProductsProps) => {
 export const getServerSideProps = async ({req, res}) => {
     res.setHeader(
         'Cache-Control',
-        's-maxage=10, stale-while-revalidate=59'
+        's-maxage=10'
     )
     const data = await (await fetch(`https://6110f09bc38a0900171f0ed0.mockapi.io/products`)).json();
     if(!data){
