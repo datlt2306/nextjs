@@ -1,27 +1,23 @@
 import { GetStaticProps, GetStaticPropsContext } from "next";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
+import useSWR from 'swr'
 
 type ProductsProps = {
     products: any[];
 };
+const url = 'https://6110f09bc38a0900171f0ed0.mockapi.io/products';
+
+const fetcher = async (url) => await (await fetch(url)).json()
 
 // client
 const ProductPage = () => {
-    const [products,setProducts] = useState([]);
-    
-    useEffect(() => {
-        // IFFE function
-        (async() => {
-            const data = await (await fetch(`https://6110f09bc38a0900171f0ed0.mockapi.io/products`)).json();
-            setProducts(data);
-        })()
-        // getProducts();
-    }, []);
-    if (!products) return null;
+    const { data, error } = useSWR(url, fetcher, { dedupingInterval: 5000})
+    if (error) return <div>failed to load</div>
+    if (!data) return <div>loading...</div>
     return (
         <div>
-            {products.map((item) => (
+            {data.map((item) => (
                 <div key={item.id}><Link href={`/products/${item.id}`}>{item.name}</Link></div>
             ))}
         </div>
