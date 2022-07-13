@@ -18,22 +18,39 @@ const ProductPage = ({ products }: ProductsProps) => {
     );
 };
 
-// Chạy ở server
-export const getStaticProps: GetStaticProps<ProductsProps> = async (
-    context: GetStaticPropsContext
-) => {
+export const getServerSideProps = async ({req, res}) => {
+    res.setHeader(
+        'Cache-Control',
+        's-maxage=10, stale-while-revalidate=59'
+    )
     const data = await (await fetch(`https://6110f09bc38a0900171f0ed0.mockapi.io/products`)).json();
-    console.log('data', data);
     if(!data){
-      return {
+        return {
         notFound: true
-      }
+        }
     }
     return {
         props: {
             products: data,
         },
     };
-};
+}
+// // Chạy ở server
+// export const getStaticProps: GetStaticProps<ProductsProps> = async (
+//     context: GetStaticPropsContext
+// ) => {
+//     const data = await (await fetch(`https://6110f09bc38a0900171f0ed0.mockapi.io/products`)).json();
+//     console.log('data', data);
+//     if(!data){
+//       return {
+//         notFound: true
+//       }
+//     }
+//     return {
+//         props: {
+//             products: data,
+//         },
+//     };
+// };
 
 export default ProductPage;
