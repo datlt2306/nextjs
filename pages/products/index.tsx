@@ -2,6 +2,7 @@ import { GetStaticProps, GetStaticPropsContext } from "next";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import useSWR from "swr";
+import { getAll } from "../../api/product";
 
 type ProductsProps = {
     products: any[];
@@ -29,12 +30,14 @@ const Products = () => {
     //         }
     //     })();
     // }, []);
-    const url = `https://6110f09bc38a0900171f0ed0.mockapi.io/products`;
-    
-    // lấy dữ liệu từ api
-    const fetcher = async (url) => await (await fetch(url)).json();
 
-    const { data, error } = useSWR(url, fetcher, { dedupingInterval: 5000});
+    // lấy dữ liệu từ api
+    const fetcher = async (url) => {
+      const { data } = await getAll(url)
+      return data
+    };
+
+    const { data, error } = useSWR('/products', fetcher, { dedupingInterval: 5000});
     
     if(!data) return <div>Loading...</div>
     if(error) return <div>Failed to load</div>
