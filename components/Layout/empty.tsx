@@ -1,14 +1,14 @@
 import React from 'react'
 import { LayoutProps } from '../../models/layout'
-import Header from '../Header'
 
-const Layout = ({children}: LayoutProps) => {
+type Props = {}
+
+const EmptyLayout = ({children}: LayoutProps) => {
   return (
     <div>
-        <Header />
         {children}
     </div>
   )
 }
 
-export default Layout
+export default EmptyLayout

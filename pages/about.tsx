@@ -1,4 +1,5 @@
 import React from 'react'
+import Layout from '../components/Layout'
 
 type Props = {}
 
@@ -7,5 +8,4 @@ const About = (props: Props) => {
     <h1>About</h1>
   )
 }
-
 export default About

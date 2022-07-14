@@ -1,13 +1,12 @@
 import { GetStaticProps, GetStaticPropsContext } from 'next'
 import Link from 'next/link'
-import React from 'react'
+import React, { useEffect } from 'react'
 
 type ProductsProps = {
   products: any[]
 }
 // client
-const Products = ({products}: ProductsProps) => {
-  console.log('Product component', products)
+const Products = ({products}) => {
   if(!products) return null;
   return (
     <div>{products.map(item => (
@@ -34,3 +33,10 @@ export default Products
 
 // getStaticProps without data
 // getStaticProps with data
+
+
+// SSR - Server Side rendering
+// SSG - Sever site generation
+// ISG - incremental site generation
+// CSR - Client Side Rendering
+
