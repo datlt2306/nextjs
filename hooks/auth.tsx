@@ -1,22 +1,21 @@
 import useSWR, { useSWRConfig } from "swr"
+import { list, signup } from "../api/auth";
 
 export const useAuth = () => {
-    const url = 'http://localhost:3001/users';
-    const fetcher = async (url: string) => await (await fetch(url)).json()
-    const { data, error} = useSWR(url, fetcher)
+    // get list user
+    const fetcher = async (url: string) => {
+        const { data } = await list(url)
+        return data
+    };
+
+    const { data, error} = useSWR("/users", fetcher)
     const { mutate } = useSWRConfig();
 
     // register
 
     const register = () => {
-        mutate(url, async() => {
-            const user = await fetch(url, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({email: "datlt23061@gmail.com", password: "123456"})
-            });
+        mutate("/users", async() => {
+            const { data: user } = await signup({email: "user1@gmail.com", password: "123456"});
             return [...data, user]
         })
     }
