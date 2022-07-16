@@ -2,7 +2,7 @@ import { GetStaticProps, GetStaticPropsContext } from "next";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import useSWR, { useSWRConfig } from "swr";
-import { add, getAll } from "../../api/product";
+import { add } from "../../api/product";
 import useProducts from "../../hooks/use-product";
 
 type ProductsProps = {
@@ -10,8 +10,7 @@ type ProductsProps = {
 };
 // client
 const Products = () => {
-    const { data, error, create, mutate } = useProducts();
-
+    const { data, error, create } = useProducts();
     if (!data) return <div>Loading...</div>;
     if (error) return <div>Failed to load</div>;
 
@@ -23,7 +22,7 @@ const Products = () => {
                 </div>
             ))}
 
-            <button onClick={() => mutate(create({ name: "Product A1111" }))}>Add Product</button>
+            <button onClick={() => create({ name: "Product 4" })}>Add Product</button>
         </div>
     );
 };

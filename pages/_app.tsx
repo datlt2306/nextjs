@@ -1,11 +1,23 @@
-import '../styles/global.scss'
+import "../styles/global.scss";
 
-import { AppPropsWithLayout } from '../models/layout'
-import Layout from '../components/Layout';
+import { AppPropsWithLayout } from "../models/layout";
+import Layout from "../components/Layout";
+import { SWRConfig } from "swr";
+import instance from "../api/config";
 
 function MyApp({ Component, pageProps }: AppPropsWithLayout) {
-  const LayoutWrapper = Component.Layout ?? Layout;
-  return (<LayoutWrapper><Component {...pageProps} /></LayoutWrapper>)
+    const LayoutWrapper = Component.Layout ?? Layout;
+    return (
+        <LayoutWrapper>
+            <SWRConfig
+                value={{
+                    fetcher: async (url) => instance.get(url),
+                }}
+            >
+                <Component {...pageProps} />
+            </SWRConfig>
+        </LayoutWrapper>
+    );
 }
 
-export default MyApp
+export default MyApp;

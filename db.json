@@ -1,48 +1,20 @@
 {
   "products": [
     {
-      "id": 1,
-      "name": "Product A"
+      "name": "Product 1",
+      "id": 1
     },
     {
-      "id": 2,
-      "name": "Product B"
+      "name": "Product 2",
+      "id": 2
     },
     {
-      "name": "Product C",
+      "name": "Product 3",
       "id": 3
     },
     {
-      "name": "Product D",
+      "name": "Product 4",
       "id": 4
-    },
-    {
-      "name": "Product D",
-      "id": 5
-    },
-    {
-      "name": "Product C",
-      "id": 6
-    },
-    {
-      "name": "Product E",
-      "id": 7
-    },
-    {
-      "name": "Product F",
-      "id": 8
-    },
-    {
-      "name": "Product G",
-      "id": 9
-    },
-    {
-      "name": "Product A1",
-      "id": 10
-    },
-    {
-      "name": "Product A1111",
-      "id": 11
     }
   ]
 }
