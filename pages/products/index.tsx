@@ -10,7 +10,7 @@ type ProductsProps = {
 };
 // client
 const Products = () => {
-    const { data, error, create } = useProducts();
+    const { data, error, create, mutate } = useProducts();
 
     if (!data) return <div>Loading...</div>;
     if (error) return <div>Failed to load</div>;
@@ -23,7 +23,7 @@ const Products = () => {
                 </div>
             ))}
 
-            <button onClick={() => create({ name: "Product G" })}>Add Product</button>
+            <button onClick={() => mutate(create({ name: "Product A1111" }))}>Add Product</button>
         </div>
     );
 };
