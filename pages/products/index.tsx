@@ -1,46 +1,20 @@
 import { GetStaticProps, GetStaticPropsContext } from "next";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
-import useSWR from "swr";
-import { getAll } from "../../api/product";
+import useSWR, { useSWRConfig } from "swr";
+import { add, getAll } from "../../api/product";
+import useProducts from "../../hooks/use-product";
 
 type ProductsProps = {
     products: any[];
 };
 // client
 const Products = () => {
-    // const [products, setProducts] = useState<any[]>([]);
-    // const [isLoading, setIsLoading] = useState<boolean>(false);
-    // const [error, setError] = useState<string>("");
+    const { data, error, create } = useProducts();
 
-    // useEffect(() => {
-    //     (async () => {
-    //         try {
-    //             const data = await (
-    //                 await fetch(`https://6110f09bc38a0900171f0ed0.mockapi.io/products`)
-    //             ).json();
-    //             if(!data) {
-    //               setIsLoading(true)
-    //             } else{
-    //               setIsLoading(false);
-    //               setProducts(data);
-    //             }
-    //         } catch (error) {
-    //           setError(error.response)
-    //         }
-    //     })();
-    // }, []);
+    if (!data) return <div>Loading...</div>;
+    if (error) return <div>Failed to load</div>;
 
-    // lấy dữ liệu từ api
-    const fetcher = async (url) => {
-      const { data } = await getAll(url)
-      return data
-    };
-
-    const { data, error } = useSWR('/products', fetcher, { dedupingInterval: 5000});
-    
-    if(!data) return <div>Loading...</div>
-    if(error) return <div>Failed to load</div>
     return (
         <div>
             {data.map((item) => (
@@ -48,6 +22,8 @@ const Products = () => {
                     <Link href={`/products/${item.id}`}>{item.name}</Link>
                 </div>
             ))}
+
+            <button onClick={() => create({ name: "Product G" })}>Add Product</button>
         </div>
     );
 };
