@@ -13,9 +13,10 @@ export const useAuth = () => {
 
     // register
 
-    const register = () => {
+    const register = (user) => {
+        const account = user;
         mutate("/users", async() => {
-            const { data: user } = await signup({email: "user1@gmail.com", password: "123456"});
+            const { data: user } = await signup(account);
             return [...data, user]
         })
     }

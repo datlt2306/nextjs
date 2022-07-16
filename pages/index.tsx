@@ -8,9 +8,7 @@ import { useAuth } from '../hooks/auth'
 import styles from '../styles/Home.module.css'
 
 const Home = () => {
-  const { data, error, register } = useAuth();
-  if(error) return <div>fail to load</div>;
-  if(!data) return <div>Loading...</div>
+  const { register } = useAuth();
   return (
     <div className={styles.container}>
       <Head>
@@ -22,8 +20,7 @@ const Home = () => {
        Main
       </main>
       <Footer />
-      {data.map((user,index) => <div key={index}>{user.email}</div>)}
-      <button onClick={() => register()}>Register</button>
+      <button onClick={() => register({email: "admin@gmail.com", password: "123456"})}>Register</button>
     </div>
   )
 }
