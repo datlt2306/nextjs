@@ -5,10 +5,7 @@ interface IProduct {
     name: string;
 }
 const useProducts = () => {
-    // swr - api
-    const { data, error, mutate } = useSWR("/products", {
-        dedupingInterval: 5000,
-    });
+    const { data, error, mutate } = useSWR("/products");
 
     // create
     const create = async (item: IProduct) => {
