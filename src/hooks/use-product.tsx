@@ -1,7 +1,5 @@
-import React from "react";
+import { add, removeItem } from "@/api/product";
 import useSWR from "swr";
-import instance from "../api/instance";
-import { add, removeItem } from "../api/product";
 
 const useProducts = () => {
     const { data, error, mutate } = useSWR("/products");
