@@ -1,27 +1,22 @@
-import type { NextPage } from 'next'
-import Head from 'next/head'
-import Image from 'next/image'
-import Footer from '../components/Footer'
-import Header from '../components/Header'
-import Layout from '../components/Layout'
-import { useAuth } from '../hooks/auth'
-import styles from '../styles/Home.module.css'
+import useSWR from "swr";
+import instance from "../api/instance";
+import useProducts from "../hooks/use-product";
+import styles from "../styles/Home.module.css";
 
 const Home = () => {
-  const { register } = useAuth();
-  return (
-    <div className={styles.container}>
-      <Head>
-        <title>Website bán mỹ phẩm</title>
-        <meta name="description" content="Thông tin website bán mỹ phẩm" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-      <main>
-       Main
-      </main>
-      <Footer />
-      <button onClick={() => register({email: "admin@gmail.com", password: "123456"})}>Register</button>
-    </div>
-  )
-}
-export default Home
+    const { data: products, error, create, remove } = useProducts();
+    if (!products) return <div>Loading...</div>;
+    if (error) return <div>error</div>;
+
+    return (
+        <div className={styles.container}>
+            {products.map((product, index) => (
+                <div key={index}>
+                    {product.name} <button onClick={() => remove(product.id)}>Delete</button>
+                </div>
+            ))}
+            <button onClick={() => create({ id: 10, name: "Product 10" })}>Create</button>
+        </div>
+    );
+};
+export default Home;
