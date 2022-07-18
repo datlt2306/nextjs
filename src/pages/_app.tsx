@@ -2,7 +2,7 @@ import "../styles/globals.scss";
 import { AppPropsWithLayout } from "../models/layout";
 import Layout from "../components/Layout";
 import { SWRConfig } from "swr";
-import instance from "../api/instance";
+import instance from "@/api/instance";
 
 function MyApp({ Component, pageProps }: AppPropsWithLayout) {
     const LayoutWrapper = Component.Layout ?? Layout;

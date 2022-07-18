@@ -1,6 +1,4 @@
-import useSWR from "swr";
-import instance from "../api/instance";
-import useProducts from "../hooks/use-product";
+import useProducts from "@/hooks/use-product";
 import styles from "../styles/Home.module.css";
 
 const Home = () => {
