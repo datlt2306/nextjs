@@ -1,6 +1,8 @@
-.demo{
-    @apply bg-black
+.demo {
+    @apply bg-black;
 }
-.demo-gachcheo{
-    
+.demo-gachcheo {
+}
+.active {
+    @apply bg-white text-white;
 }

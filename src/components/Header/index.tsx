@@ -1,32 +1,30 @@
+import clsx from "clsx";
 import Link from "next/link";
-import style from "./header.module.scss";
-
+import { useRouter } from "next/router";
+import { MenuList } from "./data-menu";
+import styles from "./header.module.css";
 type Props = {};
 
 const Header = (props: Props) => {
+    const router = useRouter();
+    console.log(router.pathname);
+
     return (
         <>
             <ul className="menu">
-                <li>
-                    <Link href="/">
-                        <a className="menu__item">Home page</a>
-                    </Link>
-                </li>
-                <li>
-                    <Link href="/about">
-                        <a className="menu__item">About</a>
-                    </Link>
-                </li>
-                <li>
-                    <Link href="/products">
-                        <a className="menu__item">Product</a>
-                    </Link>
-                </li>
-                <li>
-                    <Link href="/contact">
-                        <a className="menu__item">Contact</a>
-                    </Link>
-                </li>
+                {MenuList.map((menu, index) => (
+                    <li key={index}>
+                        <Link href={menu.path}>
+                            <a
+                                className={clsx({
+                                    active: router.pathname === menu.path,
+                                })}
+                            >
+                                {menu.label}
+                            </a>
+                        </Link>
+                    </li>
+                ))}
             </ul>
         </>
     );

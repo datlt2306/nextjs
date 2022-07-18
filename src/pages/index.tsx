@@ -13,7 +13,7 @@ const Home = () => {
                     {product.name} <button onClick={() => remove(product.id)}>Delete</button>
                 </div>
             ))}
-            <button onClick={() => create({ id: 10, name: "Product 10" })}>Create</button>
+            <button onClick={() => create({ id: 12, name: "Product 12" })}>Create</button>
         </div>
     );
 };
