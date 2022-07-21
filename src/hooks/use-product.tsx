@@ -1,8 +1,9 @@
-import { add, removeItem } from "@/api/product";
+import { add, getItem, removeItem } from "@/api/product";
 import useSWR from "swr";
+import { PublicConfiguration } from "swr/dist/types";
 
-const useProducts = () => {
-    const { data, error, mutate } = useSWR("/products");
+const useProducts = (options?) => {
+    const { data, error, mutate } = useSWR("/products", { dedupingInterval: 2000, ...options });
 
     // create
     const create = async (item) => {

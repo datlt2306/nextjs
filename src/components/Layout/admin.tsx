@@ -1,20 +1,16 @@
-import React from 'react'
-import { LayoutProps } from '../../models/layout'
+import React from "react";
+import { LayoutProps } from "../../models/layout";
+import Auth from "../Auth";
 
-const LayoutAdmin = ({children}: LayoutProps) => {
-  return (
-    <div>
-        <div className='grid grid-cols-[200px,auto]'>
-            <div>
-                Sidebar
+const LayoutAdmin = ({ children }: LayoutProps) => {
+    return (
+        <Auth>
+            <div className="grid grid-cols-[200px,auto]">
+                <div>Sidebar</div>
+                <div>{children}</div>
             </div>
-            <div>
-                {children}
-            </div>
-        </div>
-        
-    </div>
-  )
-}
+        </Auth>
+    );
+};
 
-export default LayoutAdmin
+export default LayoutAdmin;

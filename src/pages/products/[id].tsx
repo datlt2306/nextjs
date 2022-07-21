@@ -1,18 +1,20 @@
-import { GetServerSideProps, GetServerSidePropsContext, GetStaticPaths, GetStaticProps, GetStaticPropsContext } from 'next'
-import { useRouter } from 'next/router'
-import React, { useEffect } from 'react'
+import useProducts from "@/hooks/use-product";
 
+import { useRouter } from "next/router";
+import React, { useEffect, useState } from "react";
+import useSWR from "swr";
 type ProductProps = {
-  product: any
-}
+    product: any;
+};
 
-const ProductDetail = ({product}: ProductProps) => {
-  if(!product) return null;
-  return (
-    <div>ProductDetail : {product.name}</div>
-  )
-}
-
+const ProductDetail = () => {
+    const router = useRouter();
+    const { id } = router.query;
+    const { data, error } = useSWR(id ? `/products/${id}` : null);
+    if (!data) <div>Loading...</div>;
+    if (error) <div>Error</div>;
+    return <div>ProductDetail {data?.name} </div>;
+};
 
 // export const getStaticPaths: GetStaticPaths = async () => {
 //   const data = await (await fetch(`https://6110f09bc38a0900171f0ed0.mockapi.io/products`)).json();
@@ -57,5 +59,4 @@ const ProductDetail = ({product}: ProductProps) => {
 //   }
 // }
 
-export default ProductDetail
-
+export default ProductDetail;
